@@ -1,0 +1,14 @@
+names:
+- apple
+- damaged_apple
+nc: 2
+path: .
+roboflow:
+  license: CC BY 4.0
+  project: apples-fvpl5
+  url: https://universe.roboflow.com/roboflow-100/apples-fvpl5/dataset/1
+  version: 1
+  workspace: roboflow-100
+test: test/images
+train: train/images
+val: valid/images

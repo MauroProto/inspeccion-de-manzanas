@@ -1,0 +1,68 @@
+# macOS y editores
+.DS_Store
+._*
+.idea/
+.vscode/
+*.swp
+
+# Python y notebooks
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.egg-info/
+build/
+dist/
+
+# Claves y configuración privada
+.env
+.env.*
+!.env.example
+kaggle.json
+credentials.json
+token.json
+*.pem
+*.key
+
+# Copias locales nuevas. Los datasets originales ya versionados siguen en Git.
+/datos/originales/*
+!/datos/originales/.gitkeep
+/datos/preparados/*
+!/datos/preparados/.gitkeep
+
+# Videos generados y archivos comprimidos
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.part
+*.zip
+*.tar
+*.gz
+*.7z
+
+# Pesos y exportaciones de modelos
+/pesos/*
+!/pesos/.gitkeep
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.engine
+
+# Modelos del grupo y videos de la ejecución documentada
+!/pesos/
+!/pesos/cnn_variedades.pt
+!/pesos/cnn_estado.pt
+!/resultados/colab_2026-11-17/cinta_industrial_resultado.mp4
+!/resultados/colab_2026-11-17/manzanas_en_cinta_resultado.mp4
+
+# Salidas automáticas; copiar al informe solo lo que se vaya a presentar
+/runs/
+/wandb/
+*.log

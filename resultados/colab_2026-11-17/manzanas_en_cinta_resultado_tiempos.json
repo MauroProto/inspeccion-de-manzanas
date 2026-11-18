@@ -1,0 +1,15 @@
+{
+  "video": "manzanas_en_cinta.mp4",
+  "dispositivo": "cuda",
+  "cuadros": 231,
+  "resolucion": [
+    960,
+    540
+  ],
+  "vista_previa": false,
+  "fps_video": 29.97002997002997,
+  "fps_modelos_y_dibujo": 8.943278537090583,
+  "fps_lectura_procesamiento_escritura": 7.316728702991657,
+  "latencia_media_ms": 111.81581741558045,
+  "latencia_p95_ms": 235.5886495000732
+}

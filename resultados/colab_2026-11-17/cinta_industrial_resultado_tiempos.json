@@ -1,0 +1,15 @@
+{
+  "video": "cinta_industrial.mp4",
+  "dispositivo": "cuda",
+  "cuadros": 209,
+  "resolucion": [
+    960,
+    540
+  ],
+  "vista_previa": false,
+  "fps_video": 30.0,
+  "fps_modelos_y_dibujo": 37.817032320941664,
+  "fps_lectura_procesamiento_escritura": 28.136138128643317,
+  "latencia_media_ms": 26.44311144019192,
+  "latencia_p95_ms": 41.50580059995263
+}

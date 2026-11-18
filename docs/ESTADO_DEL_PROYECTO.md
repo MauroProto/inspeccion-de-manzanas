@@ -13,6 +13,12 @@ El sistema procesa videos con los pesos ya entrenados. YOLO11n localiza las manz
 
 En `manzanas_en_cinta`, **6.197 de 6.244 predicciones por cuadro** fueron «defectuosa». Es una señal de que el modelo se está usando en imágenes distintas de las de entrenamiento. Como no hay etiquetas de referencia en ese clip, esa proporción describe las salidas del sistema. En `cinta_industrial` se observan varias manzanas pequeñas omitidas y algunas cajas sobre partes de la máquina.
 
+## Verificación de los archivos publicados
+
+Volvimos a cargar los tres pesos en CPU con el código de la demo. Las dos CNN reprodujeron el Macro-F1 y la matriz de confusión de validación y prueba. El checkpoint de YOLO registra Apple Sorting v2 como origen de entrenamiento y una clase, `manzana`. Se comprobaron las 4.743 fotos seleccionadas de estado y que sus 2.466 grupos no crucen particiones.
+
+Los cinco MP4 de entrada abrieron y se procesaron muestras de 30 cuadros de cada uno. En Coral aparecieron detecciones al probar tramos posteriores. En los tramos muestreados del video de manzanas en agua no aparecieron detecciones. También se probó un cuadro vacío. Los dos MP4 de salida coinciden con las dimensiones, cuadros y tiempos de sus registros.
+
 ## Qué falta para la entrega
 
 1. **Prueba con frutas conocidas.** Filmar o conseguir un lote chico con variedades identificadas y defectos visibles revisados por una persona. Anotar cajas e identidad en los cuadros que se evalúen. Reservar frutas y clips completos para prueba. Medir detección y clasificación de punta a punta, contando las manzanas omitidas.

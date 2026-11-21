@@ -4,13 +4,34 @@ Trabajo final de Aprendizaje Automático II. YOLO11n localiza las manzanas, Byte
 
 ## Videos de la demo
 
-- [Coral, manzanas de a una](https://github.com/MauroProto/inspeccion-de-manzanas/releases/download/videos-demo/coral.mp4) — Recuadro, variedad estimada y estado.
-- [Cinta de cerca](https://github.com/MauroProto/inspeccion-de-manzanas/releases/download/videos-demo/cinta-primer-plano.mp4)
-- [Cinta industrial, plano general](https://github.com/MauroProto/inspeccion-de-manzanas/releases/download/videos-demo/cinta-industrial.mp4)
-- [Selección de manzanas](https://github.com/MauroProto/inspeccion-de-manzanas/releases/download/videos-demo/seleccion.mp4)
-- [Manzanas en agua](https://github.com/MauroProto/inspeccion-de-manzanas/releases/download/videos-demo/manzanas-en-agua.mp4)
+### Coral · Manzanas de a una
+
+https://github.com/user-attachments/assets/5e97af43-5733-4fd5-ad48-8e6dc1375a6b
+
+<details>
+<summary>Ver los otros cuatro videos</summary>
+
+### Cinta de cerca
+
+https://github.com/user-attachments/assets/14812c35-5cf8-428d-b961-388e83477b67
+
+### Cinta industrial · Plano general
+
+https://github.com/user-attachments/assets/0b1821fb-8c83-433c-920f-0a56e13c0567
+
+### Selección de manzanas
+
+https://github.com/user-attachments/assets/1995f7f0-6597-4fde-abae-e34e4e0f2653
+
+### Manzanas en agua
+
+https://github.com/user-attachments/assets/face3782-05bc-4602-8139-6b92313107fa
+
+</details>
 
 En los videos de planta, las etiquetas de variedad y daño son estimaciones sin verificar por fruta.
+
+[Descargar los MP4 de la demo](https://github.com/MauroProto/inspeccion-de-manzanas/releases/tag/videos-demo)
 
 ## Proyecto
 

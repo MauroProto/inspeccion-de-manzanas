@@ -55,14 +55,16 @@ token.json
 *.onnx
 *.engine
 
-# Modelos del grupo y videos de la ejecución documentada
+# Archivos de la entrega
 !/pesos/
+!/pesos/yolo_manzanas.pt
 !/pesos/cnn_variedades.pt
-!/pesos/cnn_estado.pt
-!/resultados/colab_2026-11-17/cinta_industrial_resultado.mp4
-!/resultados/colab_2026-11-17/manzanas_en_cinta_resultado.mp4
+!/pesos/cnn_danio_visible.pt
+!/pesos/cnn_confirmacion_danio.pt
+!/videos/*.mp4
 
-# Salidas automáticas; copiar al informe solo lo que se vaya a presentar
+# Salidas del entrenamiento
 /runs/
+/resultados/
 /wandb/
 *.log

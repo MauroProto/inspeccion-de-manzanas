@@ -1,0 +1,19 @@
+manzana,cuadro_desde,cuadro_hasta,estado,observacion
+Pasada 01,670,700,no defectuosa,Superficie roja sin daño visible
+Pasada 02,995,1025,no defectuosa,Etiqueta comercial
+Pasada 03,1335,1365,no defectuosa,Superficie roja sin daño visible
+Pasada 04,1625,1655,defectuosa,Podredumbre visible en el extremo
+Pasada 05,1985,2015,no defectuosa,Etiqueta comercial
+Pasada 06,2305,2335,no defectuosa,Superficie roja sin daño visible
+Pasada 07,2550,2580,defectuosa,Zona marrón extensa con piel hundida
+Pasada 08,2885,2915,no defectuosa,Superficie visible y cavidad del tallo
+Pasada 09,3225,3255,no defectuosa,Superficie roja sin daño visible
+Pasada 10,3570,3600,defectuosa,Podredumbre visible cerca del extremo
+Pasada 11,3915,3945,no defectuosa,Etiqueta comercial
+Pasada 12,4215,4245,no defectuosa,Etiqueta comercial
+Pasada 13,4480,4510,defectuosa,Zona oscura extensa y hundida
+Pasada 14,4880,4910,no defectuosa,Superficie visible y cavidad del tallo
+Pasada 15,5240,5270,no defectuosa,Superficie naranja y roja sin daño visible
+Pasada 16,5465,5495,defectuosa,Zona oscura y hundida
+Pasada 17,5815,5845,no defectuosa,Superficie visible y cavidad del tallo
+Pasada 18,6225,6255,defectuosa,Zona oscura extensa en la mitad inferior

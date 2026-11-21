@@ -1,6 +1,14 @@
 # Inspección de manzanas
 
-Trabajo final de Aprendizaje Automático II. YOLO11n localiza las manzanas, ByteTrack las sigue en video y las redes convolucionales estiman la variedad y el daño visible.
+Trabajo final de Aprendizaje Automático II, Universidad de San Andrés. YOLO11n detecta las manzanas en video, ByteTrack las sigue y las redes convolucionales estiman la variedad y el daño visible.
+
+## Notebooks en Google Colab
+
+- [Detección y conteo en cinta](https://colab.research.google.com/github/MauroProto/inspeccion-de-manzanas/blob/main/notebooks/deteccion_y_conteo_en_cinta.ipynb) · Evalúa YOLO y compara dos entrenamientos.
+- [Clasificación de variedades](https://colab.research.google.com/github/MauroProto/inspeccion-de-manzanas/blob/main/notebooks/clasificacion_de_variedades.ipynb) · Entrena y compara redes con fotos de cuatro variedades.
+- [Inspección de manzanas en video](https://colab.research.google.com/github/MauroProto/inspeccion-de-manzanas/blob/main/notebooks/inspeccion_de_manzanas_en_video.ipynb) · Usa los pesos finales en Coral. También permite probar otro MP4 o una cámara.
+
+Para ejecutar los notebooks, elegí un entorno con GPU. Las salidas se guardan en `/content/resultados` durante la sesión. Los [datos](datos/README.md), los [pesos](pesos/) y los [cinco videos originales](videos/) están en este repositorio.
 
 ## Videos de la demo
 
@@ -32,10 +40,3 @@ https://github.com/user-attachments/assets/face3782-05bc-4602-8139-6b92313107fa
 En los videos de planta, las etiquetas de variedad y daño son estimaciones sin verificar por fruta.
 
 [Descargar los MP4 de la demo](https://github.com/MauroProto/inspeccion-de-manzanas/releases/tag/videos-demo)
-
-## Proyecto
-
-- [Ejecutar en Colab](notebooks/README.md)
-- [Resultados y pendientes](docs/ESTADO_DEL_PROYECTO.md)
-- [Datos](datos/README.md) y [fuentes de los videos](datos/videos/README.md)
-- [Plan original](docs/PLAN_DE_DESARROLLO.md)

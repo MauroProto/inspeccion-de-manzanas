@@ -1,0 +1,153 @@
+{
+  "archivo": "seleccion_manzanas.mp4",
+  "sha256_video": "71842b1016a6a66f86093f66dc37ba8eab8011f1e4217d1211d1e776d4e10e49",
+  "fuente": "https://foodsafetyclearinghouse.org/videos/apples-being-sorted",
+  "autora": "Alison Work",
+  "licencia": "Creative Commons para usos no comerciales, según la ficha",
+  "resolucion_original": [
+    3840,
+    2160
+  ],
+  "resolucion_anotacion": [
+    960,
+    540
+  ],
+  "cuadros": 186,
+  "fps": "30000/1001",
+  "ventana": [
+    7,
+    178
+  ],
+  "linea": {
+    "eje": "x",
+    "posicion": 780,
+    "desde": 410,
+    "hasta": 448,
+    "sentido": "decreciente"
+  },
+  "anotacion_completa": true,
+  "anotador": "Codex, revisión visual del video crudo en Colab",
+  "pasadas": [
+    {
+      "pasada": "fruta_01",
+      "cuadro": 12,
+      "punto": 435
+    },
+    {
+      "pasada": "fruta_02",
+      "cuadro": 23,
+      "punto": 438
+    },
+    {
+      "pasada": "fruta_03",
+      "cuadro": 27,
+      "punto": 439
+    },
+    {
+      "pasada": "fruta_04",
+      "cuadro": 35,
+      "punto": 438
+    },
+    {
+      "pasada": "fruta_05",
+      "cuadro": 39,
+      "punto": 441
+    },
+    {
+      "pasada": "fruta_06",
+      "cuadro": 43,
+      "punto": 442
+    },
+    {
+      "pasada": "fruta_07",
+      "cuadro": 47,
+      "punto": 441
+    },
+    {
+      "pasada": "fruta_08",
+      "cuadro": 51,
+      "punto": 441
+    },
+    {
+      "pasada": "fruta_09",
+      "cuadro": 55,
+      "punto": 443
+    },
+    {
+      "pasada": "fruta_10",
+      "cuadro": 60,
+      "punto": 440
+    },
+    {
+      "pasada": "fruta_11",
+      "cuadro": 68,
+      "punto": 439
+    },
+    {
+      "pasada": "fruta_12",
+      "cuadro": 72,
+      "punto": 442
+    },
+    {
+      "pasada": "fruta_13",
+      "cuadro": 80,
+      "punto": 442
+    },
+    {
+      "pasada": "fruta_14",
+      "cuadro": 92,
+      "punto": 442
+    },
+    {
+      "pasada": "fruta_15",
+      "cuadro": 96,
+      "punto": 440
+    },
+    {
+      "pasada": "fruta_16",
+      "cuadro": 104,
+      "punto": 443
+    },
+    {
+      "pasada": "fruta_17",
+      "cuadro": 112,
+      "punto": 443
+    },
+    {
+      "pasada": "fruta_18",
+      "cuadro": 116,
+      "punto": 442
+    },
+    {
+      "pasada": "fruta_19",
+      "cuadro": 133,
+      "punto": 441
+    },
+    {
+      "pasada": "fruta_20",
+      "cuadro": 145,
+      "punto": 442
+    },
+    {
+      "pasada": "fruta_21",
+      "cuadro": 154,
+      "punto": 439
+    },
+    {
+      "pasada": "fruta_22",
+      "cuadro": 164,
+      "punto": 441
+    },
+    {
+      "pasada": "fruta_23",
+      "cuadro": 169,
+      "punto": 441
+    },
+    {
+      "pasada": "fruta_24",
+      "cuadro": 173,
+      "punto": 441
+    }
+  ],
+  "metodo": "Franja temporal en x=780 y revisión de los recortes en torno a cada centro. Se anota el carril junto a la guía blanca. Sentido comprobado siguiendo dos frutas en cuadros sucesivos (77–84 y 130–137)."
+}

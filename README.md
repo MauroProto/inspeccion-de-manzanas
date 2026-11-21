@@ -7,8 +7,9 @@ Trabajo final de Aprendizaje Automático II, Universidad de San Andrés. YOLO11n
 - [Detección y conteo en cinta](https://colab.research.google.com/github/MauroProto/inspeccion-de-manzanas/blob/main/notebooks/deteccion_y_conteo_en_cinta.ipynb) · Evalúa YOLO y compara dos entrenamientos.
 - [Clasificación de variedades](https://colab.research.google.com/github/MauroProto/inspeccion-de-manzanas/blob/main/notebooks/clasificacion_de_variedades.ipynb) · Entrena y compara redes con fotos de cuatro variedades.
 - [Inspección de manzanas en video](https://colab.research.google.com/github/MauroProto/inspeccion-de-manzanas/blob/main/notebooks/inspeccion_de_manzanas_en_video.ipynb) · Usa los pesos finales en Coral. También permite probar otro MP4 o una cámara.
+- [Inspección en vivo con la webcam](https://colab.research.google.com/github/MauroProto/inspeccion-de-manzanas/blob/main/notebooks/inspeccion_con_webcam.ipynb) · Corré las dos celdas para ver el recuadro, la variedad estimada y el daño visible en cada manzana.
 
-Para ejecutar los notebooks, elegí un entorno con GPU. Las salidas se guardan en `/content/resultados` durante la sesión. Los [datos](datos/README.md), los [pesos](pesos/) y los [cinco videos originales](videos/) están en este repositorio.
+Para ejecutar los notebooks, elegí un entorno con GPU. Los primeros tres guardan resultados en `/content/resultados`. La webcam muestra las predicciones en pantalla. Los [datos](datos/README.md), los [pesos](pesos/) y los [cinco videos originales](videos/) están en este repositorio.
 
 ## Videos de la demo
 

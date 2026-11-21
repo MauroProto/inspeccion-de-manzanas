@@ -4,16 +4,16 @@ Trabajo final de Aprendizaje Automático II. YOLO11n localiza las manzanas, Byte
 
 ## Videos de la demo
 
-### Coral · Manzanas de a una
+### Coral · Manzanas de a una · 1,5×
 
-https://github.com/user-attachments/assets/5e97af43-5733-4fd5-ad48-8e6dc1375a6b
-
-<details>
-<summary>Ver los otros cuatro videos</summary>
+https://github.com/user-attachments/assets/54a59e18-2578-4dea-8ce2-2296e51577e2
 
 ### Cinta de cerca
 
 https://github.com/user-attachments/assets/14812c35-5cf8-428d-b961-388e83477b67
+
+<details>
+<summary>Ver los otros tres videos</summary>
 
 ### Cinta industrial · Plano general
 

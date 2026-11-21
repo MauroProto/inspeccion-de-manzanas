@@ -1,95 +1,63 @@
 """Captura la cámara del navegador y muestra la predicción de cada cuadro en Colab."""
 
+import base64
 import json
 import time
+from pathlib import Path
 
 import cv2
 import numpy as np
-from IPython.display import display
-from inspeccion import sha256
+from IPython.display import Javascript, display
+
+from coral import etiqueta_manzana
 from video import dibujar_cuadro
+
+
+def preparar_camara():
+    interfaz = Path(__file__).with_suffix('.js').read_text(encoding='utf-8')
+    display(Javascript(interfaz))
+
+
+def decodificar_cuadro(foto):
+    jpeg = base64.b64decode(foto.split(',', 1)[1])
+    imagen = cv2.imdecode(np.frombuffer(jpeg, np.uint8), cv2.IMREAD_COLOR)
+    if imagen is None:
+        raise ValueError('No se pudo leer el cuadro enviado por la cámara.')
+    return imagen
+
+
+def ver_en_vivo(inspeccion, nombre_camara=''):
+    """Detecta y clasifica hasta que se pulse Detener cámara."""
+    from google.colab.output import eval_js
+
+    inspeccion.reiniciar_seguimiento()
+    preparar_camara()
+    try:
+        iniciar = f'iniciarManzanas({json.dumps(nombre_camara)}, 640, true)'
+        foto = eval_js(iniciar + '.then(leerManzanas)', timeout_sec=90)
+        while foto:
+            imagen = decodificar_cuadro(foto)
+            cajas = inspeccion.procesar_lote([imagen], clasificar=True)[0]
+            marcas = []
+            for caja in cajas:
+                texto, color = etiqueta_manzana(caja, inspeccion.umbral_danio)
+                coordenadas = [round(caja[k]) for k in ('x1', 'y1', 'x2', 'y2')]
+                marcas.append({'caja': coordenadas, 'texto': texto, 'color': color})
+            foto = eval_js(f'siguienteManzanas({json.dumps(marcas)})', timeout_sec=15)
+    finally:
+        try:
+            eval_js('window.cerrarManzanas?.()', timeout_sec=5)
+        except Exception:
+            print('Si la cámara sigue encendida, cerrá la pestaña de Colab.')
 
 
 def probar_camara(inspeccion, fuente, salida, nombre_camara="", clasificar=True, cuadros_de_prueba=80):
     cuadros_de_calentamiento = 10
     resolucion_ideal = 640
-    import base64
     from google.colab.output import eval_js
-    from IPython.display import Javascript
+    from inspeccion import sha256
 
-    display(Javascript("""
-    (() => {
-    window.cerrarManzanas?.();
-    const c = {};
-    window.iniciarManzanas = async function(nombre, ancho) {
-      c.stream = await navigator.mediaDevices.getUserMedia({
-        video: {width: {ideal: ancho}}, audio: false
-      });
-      if (nombre) {
-        const dispositivos = await navigator.mediaDevices.enumerateDevices();
-        const camaras = dispositivos.filter(d => d.kind === 'videoinput');
-        const elegida = camaras.find(d => d.label.toLowerCase().includes(nombre.toLowerCase()));
-        if (!elegida) throw new Error('Cámaras disponibles: ' + camaras.map(d => d.label).join(', '));
-        c.stream.getTracks().forEach(t => t.stop());
-        c.stream = await navigator.mediaDevices.getUserMedia({
-          video: {deviceId: {exact: elegida.deviceId}, width: {ideal: ancho}}, audio: false
-        });
-      }
-      c.video = document.createElement('video');
-      c.video.playsInline = true;
-      c.video.muted = true;
-      c.video.srcObject = c.stream;
-      await c.video.play();
-      c.canvas = document.createElement('canvas');
-      c.canvas.width = c.video.videoWidth;
-      c.canvas.height = c.video.videoHeight;
-      c.salida = document.createElement('img');
-      c.salida.width = c.canvas.width;
-      c.salida.alt = 'Imagen procesada';
-      c.boton = document.createElement('button');
-      c.boton.textContent = 'Detener cámara';
-      c.boton.onclick = window.cerrarManzanas;
-      document.body.append(c.boton, c.salida);
-      c.activa = true;
-      return [c.canvas.width, c.canvas.height];
-    };
-    window.leerManzanas = async function() {
-      if (!c.activa) return null;
-      if (document.hidden) throw new Error('Mantené visible la pestaña durante la prueba.');
-      await new Promise((resolver, rechazar) => {
-        const limite = setTimeout(() => {
-          if (c.activa) rechazar(new Error('La cámara dejó de entregar cuadros.'));
-          else resolver();
-        }, 3000);
-        c.video.requestVideoFrameCallback(() => { clearTimeout(limite); resolver(); });
-      });
-      if (!c.activa) return null;
-      c.toma = performance.now();
-      c.canvas.getContext('2d').drawImage(c.video, 0, 0);
-      return c.canvas.toDataURL('image/jpeg', 0.8);
-    };
-    window.mostrarManzanas = async function(jpeg) {
-      if (!c.activa) return null;
-      c.salida.src = jpeg;
-      await c.salida.decode();
-      await new Promise((resolver, rechazar) => {
-        const limite = setTimeout(() => rechazar(new Error('La vista previa dejó de actualizarse.')), 3000);
-        requestAnimationFrame(() => requestAnimationFrame(() => { clearTimeout(limite); resolver(); }));
-      });
-      return c.activa ? performance.now() - c.toma : null;
-    };
-    window.cerrarManzanas = function() {
-      c.activa = false;
-      if (c.stream) c.stream.getTracks().forEach(t => t.stop());
-      if (c.video) {
-        c.video.pause();
-        c.video.srcObject = null;
-      }
-      c.boton?.remove();
-    };
-    window.addEventListener('pagehide', window.cerrarManzanas, {once: true});
-    })();
-    """))
+    preparar_camara()
 
     if cuadros_de_prueba < 1 or cuadros_de_calentamiento < 0:
         raise ValueError('Revisá la cantidad de cuadros.')
@@ -108,10 +76,7 @@ def probar_camara(inspeccion, fuente, salida, nombre_camara="", clasificar=True,
             foto = eval_js('leerManzanas()', timeout_sec=15)
             if foto is None:
                 break
-            jpeg = base64.b64decode(foto.split(',')[1])
-            imagen = cv2.imdecode(np.frombuffer(jpeg, np.uint8), cv2.IMREAD_COLOR)
-            if imagen is None:
-                raise ValueError('El navegador no devolvió un cuadro JPEG válido.')
+            imagen = decodificar_cuadro(foto)
             t0 = time.perf_counter()
             predicciones = inspeccion.procesar_lote([imagen], clasificar=clasificar)[0]
             dibujada = dibujar_cuadro(imagen, predicciones, inspeccion.umbral_danio, fuente, clasificar)

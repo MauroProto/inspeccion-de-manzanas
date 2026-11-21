@@ -7,6 +7,18 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 
+def etiqueta_manzana(caja, umbral):
+    puntaje = caja['p_danio']
+    estado = 'Estado por revisar'
+    if puntaje is not None:
+        estado = 'Con daño visible' if puntaje >= umbral else 'Sin daño visible'
+    borde = (239, 158, 110) if puntaje is not None and puntaje >= umbral else (129, 207, 227)
+
+    variedad = caja['variedad']
+    texto = f'{variedad} (estimada) · {estado}' if variedad else estado
+    return texto, borde
+
+
 def dibujar(imagen, cajas, umbral, fuente):
     if not cajas:
         return imagen
@@ -15,15 +27,8 @@ def dibujar(imagen, cajas, umbral, fuente):
     lapiz = ImageDraw.Draw(lienzo)
     for caja in cajas:
         x1, y1, x2, y2 = [round(caja[k]) for k in ('x1', 'y1', 'x2', 'y2')]
-        puntaje = caja['p_danio']
-        estado = 'Estado por revisar'
-        if puntaje is not None:
-            estado = 'Con daño visible' if puntaje >= umbral else 'Sin daño visible'
-        borde = (239, 158, 110) if puntaje is not None and puntaje >= umbral else (129, 207, 227)
+        texto, borde = etiqueta_manzana(caja, umbral)
         lapiz.rectangle((x1, y1, x2, y2), outline=borde, width=2)
-
-        variedad = caja['variedad']
-        texto = f'{variedad} (estimada) · {estado}' if variedad else estado
         izq, arriba, der, abajo = lapiz.textbbox((0, 0), texto, font=fuente)
         ancho_texto, alto_texto = der - izq + 14, abajo - arriba + 8
         x = max(0, min(x1, ancho - ancho_texto))

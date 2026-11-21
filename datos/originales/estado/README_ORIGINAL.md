@@ -3,13 +3,13 @@
 # Dataset Apples Images
 The developed data set consists of 5,000 real and synthetic images of fresh apples, and 5,000 real and synthetic images of apples with defects.
 
-![Image text](apple.jpg)
+![Image text](https://raw.githubusercontent.com/luischuquim/Healthy-Defective-Fruits/967ef53c60e195fcda3d64cff90d28cacfc50540/apple.jpg)
 
 
 # Dataset Mangoes Images
 The developed data set consists of 5,000 real and synthetic images of fresh mangoes, and 5,000 real and synthetic images of mangoes with defects.
 
-![Image text](mango.jpg)
+![Image text](https://raw.githubusercontent.com/luischuquim/Healthy-Defective-Fruits/967ef53c60e195fcda3d64cff90d28cacfc50540/mango.jpg)
 
 
 For paper reference (Bibtex)

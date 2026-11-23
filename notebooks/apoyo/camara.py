@@ -8,9 +8,40 @@ from pathlib import Path
 import cv2
 import numpy as np
 from IPython.display import Javascript, display
+from ultralytics import YOLO
 
 from coral import etiqueta_manzana
 from video import dibujar_cuadro
+
+# Nuestro YOLO se entrenó solo con fotos de manzanas y nunca vio una cara.
+# En la cámara, una caja se muestra solo si YOLO11n preentrenado en COCO,
+# que también conoce personas, ve una manzana en el mismo lugar.
+MANZANA_EN_COCO = 47
+
+
+def superposicion(caja, otra):
+    """Área común dividida por el área que cubren las dos cajas (IoU)."""
+    x1, y1 = max(caja[0], otra[0]), max(caja[1], otra[1])
+    x2, y2 = min(caja[2], otra[2]), min(caja[3], otra[3])
+    comun = max(0, x2 - x1) * max(0, y2 - y1)
+    total = ((caja[2] - caja[0]) * (caja[3] - caja[1])
+             + (otra[2] - otra[0]) * (otra[3] - otra[1]) - comun)
+    return comun / total if total > 0 else 0
+
+
+def solo_manzanas(imagen, cajas, coco, dispositivo):
+    """Deja las cajas que el YOLO de COCO también reconoce como manzana en este cuadro."""
+    if not cajas:
+        return []
+    resultado = coco.predict(imagen, imgsz=640, conf=0.10, classes=[MANZANA_EN_COCO],
+                             device=dispositivo, verbose=False)[0]
+    manzanas_coco = resultado.boxes.xyxy.tolist()
+    elegidas = []
+    for caja in cajas:
+        coordenadas = (caja['x1'], caja['y1'], caja['x2'], caja['y2'])
+        if any(superposicion(coordenadas, otra) >= 0.3 for otra in manzanas_coco):
+            elegidas.append(caja)
+    return elegidas
 
 
 def preparar_camara():
@@ -31,6 +62,7 @@ def ver_en_vivo(inspeccion, nombre_camara=''):
     from google.colab.output import eval_js
 
     inspeccion.reiniciar_seguimiento()
+    coco = YOLO('yolo11n.pt')
     preparar_camara()
     try:
         iniciar = f'iniciarManzanas({json.dumps(nombre_camara)}, 640, true)'
@@ -38,6 +70,7 @@ def ver_en_vivo(inspeccion, nombre_camara=''):
         while foto:
             imagen = decodificar_cuadro(foto)
             cajas = inspeccion.procesar_lote([imagen], clasificar=True)[0]
+            cajas = solo_manzanas(imagen, cajas, coco, inspeccion.dispositivo)
             marcas = []
             for caja in cajas:
                 texto, color = etiqueta_manzana(caja, inspeccion.umbral_danio)
@@ -62,6 +95,7 @@ def probar_camara(inspeccion, fuente, salida, nombre_camara="", clasificar=True,
     if cuadros_de_prueba < 1 or cuadros_de_calentamiento < 0:
         raise ValueError('Revisá la cantidad de cuadros.')
     inspeccion.reiniciar_seguimiento()
+    coco = YOLO('yolo11n.pt')
 
     latencias, tiempos_modelos, cantidades = [], [], []
     inicio_medicion = None
@@ -79,6 +113,7 @@ def probar_camara(inspeccion, fuente, salida, nombre_camara="", clasificar=True,
             imagen = decodificar_cuadro(foto)
             t0 = time.perf_counter()
             predicciones = inspeccion.procesar_lote([imagen], clasificar=clasificar)[0]
+            predicciones = solo_manzanas(imagen, predicciones, coco, inspeccion.dispositivo)
             dibujada = dibujar_cuadro(imagen, predicciones, inspeccion.umbral_danio, fuente, clasificar)
             tiempo_modelos = (time.perf_counter() - t0) * 1000
             ok, archivo = cv2.imencode('.jpg', dibujada, [cv2.IMWRITE_JPEG_QUALITY, 80])
